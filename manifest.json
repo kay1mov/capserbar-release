@@ -1,0 +1,28 @@
+{
+  "__version__": 1000,
+  "path": [
+    "common/__init__.py",
+    "common/io.py",
+    "common/sound.py",
+    "common/translate.py",
+    "common/utils.py",
+    "data/localization/translate.json",
+    "data/sfx/error/error-1.mp3",
+    "data/sfx/error/error-2.mp3",
+    "data/sfx/error/error-3.mp3",
+    "data/sfx/notifications/notify-1.mp3",
+    "data/sfx/notifications/notify-2.mp3",
+    "data/sfx/notifications/notify-3.mp3",
+    "data/sfx/start/start-1.mp3",
+    "data/sfx/success/success-1.mp3",
+    "data/sfx/success/success-2.mp3",
+    "data/themes/breeze.json",
+    "data/common.json",
+    "minibar/__init__.py",
+    "minibar/gui.py",
+    "minibar/logic.py",
+    "__init__.py",
+    "config.py",
+    "main.py"
+  ]
+}
