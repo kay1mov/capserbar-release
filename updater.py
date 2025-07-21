@@ -1,12 +1,11 @@
 import requests
 import json
 import os
-import sys
-
+from tqdm import tqdm
 # === НАСТРОЙКИ ===
 GITHUB_USER = "kay1mov"
 REPO_NAME = "capserbar-release"
-BRANCH = "master"
+BRANCH = "refs/heads/main"
 MANIFEST_PATH = "manifest.json"
 
 RAW_BASE = f"https://raw.githubusercontent.com/{GITHUB_USER}/{REPO_NAME}/{BRANCH}/"
@@ -22,7 +21,6 @@ def download_file(file_path):
         if r.status_code == 200:
             with open(local_path, 'wb') as f:
                 f.write(r.content)
-            print(f"✓ {file_path}")
         else:
             print(f"✗ Ошибка 404: {file_path}")
     except Exception as e:
@@ -39,9 +37,24 @@ def update_from_manifest():
 
         data = json.loads(r.text)
         file_list = data["path"]
-        print(f"📦 Найдено файлов: {len(file_list)}")
+        actual_version = data["__version__"]
+        with open("info.json", mode="r", encoding="utf8") as f:
+            local_data = json.load(f)
 
-        for path in file_list:
+        local_version = local_data["version"]
+
+        if actual_version > local_version:
+            print(f"Обнаружена новая версия программы {actual_version}")
+            print("Установка...")
+            data = {"version": actual_version}
+            with open("info.json", mode="w", encoding="utf8")  as f: json.dump(data, f, indent=4)
+        else:
+            print("Обновления не найдены.")
+            return
+
+        print(f"📦 Найдено файлов: {len(file_list)}")
+        os.system('pip install tqdm')
+        for path in tqdm(file_list, desc="Обновление"):
             download_file(path)
 
         print("✅ Обновление завершено.")

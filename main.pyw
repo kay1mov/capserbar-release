@@ -10,7 +10,6 @@ class Auth():
         return Security.IsPasswordRight(used_password, account_name)
 
 
-
 class App(ctk.CTk):
 
     def __init__(self, lang="ru"):
@@ -19,7 +18,6 @@ class App(ctk.CTk):
         self.lang = lang
 
     def change_lang(self):
-
         if self.lang == "uz": self.lang = "ru"
         else: self.lang = "uz"
 
@@ -89,7 +87,8 @@ class App(ctk.CTk):
 
 
 if __name__ == "__main__":
-
+    import updater
+    updater.update_from_manifest()
     app = App()
     app.setup_ui()
     app.mainloop()
