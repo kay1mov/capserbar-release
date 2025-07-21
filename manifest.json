@@ -23,6 +23,6 @@
     "minibar/logic.py",
     "__init__.py",
     "config.py",
-    "main.py"
+    "main.pyw"
   ]
 }
